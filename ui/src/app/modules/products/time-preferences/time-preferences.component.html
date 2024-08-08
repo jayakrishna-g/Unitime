@@ -1,0 +1,50 @@
+<div>
+  <div class="time-row" *ngIf="!standalone">
+    <div *ngFor="let time of timeIntervals" class="time-cell cell">
+      <span class="time-text">
+        {{ time.split('-')[0] }}
+        <br />
+        {{ time.split('-')[1] }}
+      </span>
+    </div>
+  </div>
+
+  <div class="pref-container {{ standalone ? 'standalone' : '' }}">
+    <div *ngFor="let row of availability_matrix; let i = index" class="row">
+      <div class="time-cell cell" *ngIf="!standalone">
+        <span class="time-text">{{ days[i] }}</span>
+      </div>
+      <div *ngFor="let cell of row; let j = index">
+        <div class="cell-{{ cell }} cell" (click)="cellClick(i, j)"></div>
+      </div>
+      <br />
+    </div>
+  </div>
+</div>
+
+<div class="scale" *ngIf="!standalone">
+  <div class="scale-cell">
+    <div class="cell-1 cell"></div>
+    <span>Strongly Preferred</span>
+  </div>
+  <div class="scale-cell">
+    <div class="cell-2 cell"></div>
+    <span>Preferred</span>
+  </div>
+  <div class="scale-cell">
+    <div class="cell-3 cell"></div>
+    <span>Neutral</span>
+  </div>
+  <div class="scale-cell">
+    <div class="cell-4 cell"></div>
+    <span>Not Preferred</span>
+  </div>
+  <div class="scale-cell">
+    <div class="cell-5 cell"></div>
+    <span>Strongly Not Preferred</span>
+  </div>
+  <div class="scale-cell">
+    <div class="cell-6 cell"></div>
+    <span>Prohibited</span>
+  </div>
+</div>

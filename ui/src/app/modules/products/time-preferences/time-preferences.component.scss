@@ -1,0 +1,88 @@
+:host{
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+}
+
+.cell {
+    text-align: center;
+    border: 1px solid #ddd;
+    height:24px;
+    width: 24px;
+    padding: 24px;
+}
+
+.cell-0 {
+    background-color: #ececec;
+    color: #000000;
+}
+
+.cell-1 {
+    background-color: #00bd4cee;
+    color: #000000;
+}
+
+.cell-2 {
+    background-color: #37ff00ac;
+    color: #000000;
+}
+
+.cell-3 {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.cell-4 {
+    background-color: #f2b2b2;
+    color: #000000;
+}
+
+.cell-5 {
+    background-color: #f96b6b;
+    color: #000000;
+}
+
+.cell-6 {
+    background-color: #ff0000;
+    color: #000000;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.pref-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    padding-top: 0;
+}
+
+.time-row {
+    display: flex;
+    flex-direction: row;
+    font-size: small;
+    padding-left: calc(2rem + 50px);
+
+}
+
+.time-text {
+    position: absolute;
+    top: 8px;
+    left: 4px;
+}
+
+.time-cell {
+    position: relative;
+}
+
+.scale-cell {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+}

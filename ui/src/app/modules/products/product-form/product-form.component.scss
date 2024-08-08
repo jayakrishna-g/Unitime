@@ -1,0 +1,51 @@
+:host {
+  --edit-product-width: 500px;
+  margin: 2em;   
+}
+
+.productForm {
+  * {
+      width: 100%;
+  }
+}
+
+.custom-form-field {
+  margin: 1em 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  label {
+      width: 30%;
+      text-align: left;
+      justify-content: center;
+      padding-right: 1em;
+  }
+  ::ng-deep .mat-form-field-infix {
+      margin-top: 4px;
+      border-top: 0;
+      padding: 8px;
+  }
+  ::ng-deep .mat-form-field-wrapper {
+      padding: 0;
+  }
+}
+
+.productForm {
+  padding: 1em 4em;
+}
+
+.productFormTitle {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-bottom: 1em;
+  margin: 1em;
+}
+
+.submit-actions {
+  display: flex;
+  justify-content: space-between;
+  button {
+      width: 48%;
+  }
+}

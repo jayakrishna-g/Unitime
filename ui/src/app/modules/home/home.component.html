@@ -1,0 +1,35 @@
+<div class="border p-3 mb-5 bg-white rounded mt-5 flex flex-row gap-5 justify-between items-center">
+  <div>
+    <h1 class="text-2xl font-bold">Hello {{ authService.getTokenData().businessName }} 👋</h1>
+    <p>Welcome to UniTime!</p>
+    <p>Here you can manage your professors, courses, and preferences.</p>
+    <p>Click on Instructors to get started</p>
+  </div>
+  <div class="flex flex-col items-center">
+    Your Time:
+    <div
+      class="
+        relative
+        font-mono font-extrabold
+        text-6xl
+        grid grid-cols-2
+        text-right text-gray-800
+        gap-x-px
+        border-2 border-gray-600
+        rounded
+      "
+    >
+      <!-- left timer -->
+      <div class="relative py-8 px-5 border-r-2 border-gray-600">
+        <div class="relative">{{ curHours }}</div>
+      </div>
+
+      <!-- right timer -->
+      <div class="relative py-8 px-5">
+        <div class="relative">{{ curMinutes }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

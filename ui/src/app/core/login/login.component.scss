@@ -1,0 +1,53 @@
+@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
+
+:root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  @include mat.elevation(2);
+  width: 350px;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+.title {
+  font-size: 3em;
+  align-self: center;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.login-box {
+  // background-color: rgba(123, 165, 243, 0.6);
+  padding: 1em;
+}
+
+:host ::ng-deep .mat-form-field {
+  width: 100% !important;
+}
+
+:host ::ng-deep .mat-flat-button {
+  background-color: rgba($color: #673ab7, $alpha: 0.7);
+}
+
+input {
+  color: black !important;
+}
+:host .mat-radio-button {
+  margin-left: 16px;
+}

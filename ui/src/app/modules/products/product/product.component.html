@@ -1,0 +1,82 @@
+<!-- #region -->
+<div class="container">
+  <div class="row">
+    <div
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1em;
+        margin: 1em 0;
+      "
+    >
+      <h1>{{ product.name }}</h1>
+      <div
+        class="actions"
+        style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 1em"
+      >
+        <button mat-flat-button color="primary" (click)="onEdit()">Edit</button>
+        <button mat-flat-button color="primary" (click)="onEditAssignment()">Edit Assignment Preferences</button>
+        <button mat-flat-button color="primary" (click)="onDelete()">Edit Preferences</button>
+        <button mat-flat-button color="primary" (click)="onDelete()">Previous</button>
+        <button mat-flat-button color="primary" (click)="onDelete()">Next</button>
+        <button mat-flat-button color="primary" (click)="onDelete()">Back</button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <br />
+    <div class="details-grid">
+      <span>External Id: </span>
+      <span>{{ product.externalId }}</span>
+      <span>Account Name: </span>
+      <span>{{ product.externalId }}</span>
+      <span>Email: </span>
+      <span>{{ product.externalId + '@asu.edu' }}</span>
+      <span>Position: </span>
+      <span>{{ product.position }}</span>
+      <span>Maximum Load: </span>
+      <span>{{ product.maximalLoad }}</span>
+
+      <!-- <span>Note: </span>
+      <span>{{ product.note }}</span>
+      <span>Preference Time: </span>
+      <span>{{ product.preferenceTime }}</span>
+      <span>Room Distribution: </span>
+      <span>{{ product.roomDistribution }}</span>
+      <span>Course: </span>
+      <span>{{ product.course }}</span>
+      <span>Class Assignment: </span>
+      <span>{{ product.classAssignment }}</span>
+      <span>Exam Assignment: </span>
+      <span>{{ product.examAssignment }}</span>
+      <span>Ignore Too Far: </span>
+      <span>{{ product.ignoreTooFar }}</span>
+      <span>Department: </span>
+      <span>{{ product.department }}</span> -->
+    </div>
+    <div style="margin-top: 2em; display: flex; flex-direction: column; width: 100%; gap: 0.2em">
+      <h1>Class Assignments</h1>
+      <mat-divider></mat-divider>
+      <br />
+      <span>{{ product.classAssignment }}</span>
+      <br />
+      <br />
+    </div>
+
+    <div style="margin-top: 2em; display: flex; flex-direction: column; width: 100%; gap: 0.2em">
+      <h1>Preferences</h1>
+      <mat-divider></mat-divider>
+      <br />
+      <app-time-preferences [preferences]="this.product.preferenceTime" [disableClick]="true"></app-time-preferences>
+    </div>
+
+    <div style="margin-top: 2em; display: flex; flex-direction: column; width: 100%; gap: 0.2em">
+      <h1>Teaching Assignment</h1>
+      <mat-divider></mat-divider>
+      <br />
+      <span>{{ product.examAssignment }}</span>
+      <br />
+    </div>
+  </div>
+</div>

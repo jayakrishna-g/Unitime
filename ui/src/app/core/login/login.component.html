@@ -1,0 +1,62 @@
+<div class="login-wrapper" fxLayout="column" fxLayoutAlign="center center">
+  <div class="login-container">
+    <span fxFlexFill fxLayout="column">
+      <div fxFlex="10"></div>
+      <div class="title">UniTime</div>
+      <div fxFlex="20"></div>
+      <mat-radio-group aria-label="Select one option" [(ngModel)]="formChoice">
+        <mat-radio-button value="login" [checked]="true" routerLink="./../login"> Login </mat-radio-button>
+        <mat-radio-button value="signup" [checked]="false" routerLink="./../signup"> Signup </mat-radio-button>
+      </mat-radio-group>
+
+      <div class="login-box">
+        <form (ngSubmit)="login()" [formGroup]="loginForm" *ngIf="formChoice === 'login'">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input type="text" matInput formControlName="email" placeholder="Email" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" placeholder="Password" />
+          </mat-form-field>
+          <button mat-flat-button color="primary" type="submit">Login</button>
+          <a href="\EditPass" style="display: block">forgot or edit password?</a>
+        </form>
+        <form (ngSubmit)="signup()" [formGroup]="signUpForm" *ngIf="formChoice === 'signup'">
+          <mat-form-field>
+            <mat-label>Business Name</mat-label>
+            <input type="text" matInput formControlName="businessName" placeholder="FullName" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input type="text" matInput formControlName="email" placeholder="Email" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              matInput
+              formControlName="password"
+              placeholder="Password"
+              (change)="onPasswordchange()"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Confirm Password</mat-label>
+            <input
+              type="password"
+              matInput
+              formControlName="passwordAgain"
+              placeholder="Confirm Password"
+              (change)="onPasswordchange()"
+            />
+            <mat-error *ngIf="passwordAgain.hasError('mismatch')">Passwords are different!should be same</mat-error>
+          </mat-form-field>
+          <button mat-flat-button color="primary" type="submit">Sign Up</button>
+        </form>
+      </div>
+    </span>
+  </div>
+</div>

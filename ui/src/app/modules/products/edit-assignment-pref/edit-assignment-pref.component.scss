@@ -1,0 +1,44 @@
+.header-block {
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4px;
+    margin-top: 2em;;
+    margin-bottom: 1em;
+    .header-title {
+        font-size: 1.5em;
+        font-weight: 500;
+    }
+    .header-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        button {
+            margin-left: 1em;
+        }
+    }
+}
+:host {
+    h1 {
+        margin-bottom: 0;
+    }
+}
+.distribution-pref {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    padding-top: 0;
+    margin-right: auto;
+}
+.distribution-pref-item {
+    display: flex;
+    flex-direction: row;
+    gap: 3em;
+    max-width: 60%;
+    * {
+        width: 100%;
+    }
+}

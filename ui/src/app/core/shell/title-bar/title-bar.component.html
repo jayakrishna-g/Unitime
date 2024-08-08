@@ -1,0 +1,18 @@
+<div *ngIf="device === 'mobile'; else default" class="mobile">
+  <span class="title">UniTime</span>
+  <span style="flex: 1 1 auto"></span>
+  <span class="title-action">
+    <mat-icon (click)="displayDetails()">person</mat-icon>
+  </span>
+</div>
+
+<ng-template #default>
+  <div class="default">
+    <span class="menu-icon">
+      <mat-icon>menu</mat-icon>
+    </span>
+    <span class="title">UniTime</span>
+
+    <span style="flex: 1 1 auto"></span>
+  </div>
+</ng-template>

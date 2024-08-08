@@ -1,0 +1,90 @@
+<h1 class="productFormTitle">Update Instructor</h1>
+
+<form (ngSubmit)="update()" [formGroup]="productForm" class="productForm">
+  <div class="custom-form-field w-100">
+    <label>External Id</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="externalId" placeholder="External Id" />
+    </mat-form-field>
+  </div>
+  <div class="custom-form-field w-100">
+    <!-- custom-form-field is a custom class -->
+    <label>Name</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="name" placeholder="Name of the Instructor" />
+    </mat-form-field>
+  </div>
+  <div class="custom-form-field w-100">
+    <label>Position</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="position" placeholder="Position" />
+    </mat-form-field>
+  </div>
+
+  <div class="custom-form-field w-100">
+    <label>Note</label>
+    <mat-form-field class="w-100">
+      <textarea type="text" matInput formControlName="note" placeholder="Note"> </textarea>
+    </mat-form-field>
+  </div>
+
+  <!-- <div class="custom-form-field w-100">
+    <label>Preference Time</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="preferenceTime" placeholder="Preference Time" />
+    </mat-form-field>
+  </div>
+  <div class="custom-form-field w-100">
+    <label>Room Distribution</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="roomDistribution" placeholder="Room Distribution" />
+    </mat-form-field>
+  </div>
+  <div class="custom-form-field w-100">
+    <label>Course</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="course" placeholder="Course" />
+    </mat-form-field>
+  </div>
+  <div class="custom-form-field w-100">
+    <label>Teaching Preference</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="teachingPreference" placeholder="Teaching Preference" />
+    </mat-form-field>
+  </div>
+  <div class="custom-form-field w-100">
+    <label>Maximum Load</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="maximalLoad" placeholder="Maximum Load" />
+    </mat-form-field>
+  </div>
+  <div class="custom-form-field w-100">
+    <label>Class Assignment</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="classAssignment" placeholder="Class Assignment" />
+    </mat-form-field>
+  </div> -->
+  <div class="custom-form-field w-100">
+    <label>Exam Assignment</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="examAssignment" placeholder="Exam Assignment" />
+    </mat-form-field>
+  </div>
+  <div class="custom-form-field w-100">
+    <label>Ignore Too Far</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="ignoreTooFar" placeholder="Ignore Too Far" />
+    </mat-form-field>
+  </div>
+  <div class="custom-form-field w-100">
+    <label>Department</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="department" placeholder="Department" />
+    </mat-form-field>
+  </div>
+  <br />
+  <div class="submit-actions" fxLayout="row">
+    <button type="submit" mat-flat-button class="p-16" color="primary">Update</button>
+    <button mat-stroked-button class="p-16" color="primary" (click)="back()">Back</button>
+  </div>
+</form>

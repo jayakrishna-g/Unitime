@@ -1,0 +1,66 @@
+<div class="header-block">
+  <h1>{{ this.product.name }} {{ this.product.position !== '' ? this.product.position : '' }}</h1>
+  <div class="header-actions">
+    <button mat-raised-button color="primary" (click)="update()">Update</button>
+    <button mat-stroked-button color="warn" (click)="back()">Back</button>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+
+<div class="header-block">
+  <h1>Time Preferences</h1>
+</div>
+
+<app-time-preferences
+  [preferences]="(preferences | async) || ''"
+  (preferencesChange)="updatePreferences($event)"
+></app-time-preferences>
+
+<div class="header-block">
+  <h1>Distribution Pref</h1>
+  <div class="header-actions">
+    <button mat-raised-button color="primary" (click)="addDistributionPref()">Add</button>
+  </div>
+</div>
+
+<div class="distribution-pref">
+  <div *ngFor="let distribution of distributionPref | async" class="distribution-pref-item">
+    <mat-form-field>
+      <mat-select [(ngModel)]="distribution.key" placeholder="Distribution Pref">
+        <mat-option *ngFor="let room of distributionPrefOptions" [value]="room">
+          {{ room }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Value</mat-label>
+      <input matInput [(ngModel)]="distribution.value" placeholder="Value" />
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="header-block">
+  <h1>Course Pref</h1>
+  <div class="header-actions">
+    <button mat-raised-button color="primary" (click)="addDistributionPref()">Add</button>
+  </div>
+</div>
+
+<div class="distribution-pref">
+  <div *ngFor="let distribution of coursePref | async" class="distribution-pref-item">
+    <mat-form-field>
+      <mat-select [(ngModel)]="distribution.key" placeholder="Course Pref">
+        <mat-option *ngFor="let room of coursePrefOptions" [value]="room">
+          {{ room }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Value</mat-label>
+      <input matInput [(ngModel)]="distribution.value" placeholder="Value" />
+    </mat-form-field>
+  </div>
+</div>
