@@ -22,9 +22,6 @@ import HTTP_CODES_ENUM from "@/services/api/types/http-codes";
 import { useTranslation } from "@/services/i18n/client";
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
-import SocialAuth from "@/services/social-auth/social-auth";
-import { isGoogleAuthEnabled } from "@/services/social-auth/google/google-config";
-import { isFacebookAuthEnabled } from "@/services/social-auth/facebook/facebook-config";
 
 type TPolicy = {
   id: string;
@@ -217,13 +214,11 @@ function Form() {
               </Box>
             </Grid>
 
-            {[isGoogleAuthEnabled, isFacebookAuthEnabled].some(Boolean) && (
+            {(
               <Grid item xs={12}>
                 <Divider sx={{ mb: 2 }}>
                   <Chip label={t("sign-up:or")} />
                 </Divider>
-
-                <SocialAuth />
               </Grid>
             )}
           </Grid>
