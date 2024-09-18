@@ -37,7 +37,7 @@ export class UserMapper {
     domainEntity.createdAt = raw.createdAt;
     domainEntity.updatedAt = raw.updatedAt;
     domainEntity.deletedAt = raw.deletedAt;
-
+    domainEntity.externalId = raw.externalId;
     return domainEntity;
   }
 
@@ -81,6 +81,7 @@ export class UserMapper {
     persistenceSchema.createdAt = domainEntity.createdAt;
     persistenceSchema.updatedAt = domainEntity.updatedAt;
     persistenceSchema.deletedAt = domainEntity.deletedAt;
+    persistenceSchema.externalId = domainEntity.externalId;
     return persistenceSchema;
   }
 }

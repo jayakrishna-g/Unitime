@@ -150,6 +150,7 @@ export class AuthService {
         provider: authProvider,
         role,
         status,
+        externalId: socialData.id,
       });
 
       user = await this.usersService.findById(user.id);
@@ -203,6 +204,7 @@ export class AuthService {
       status: {
         id: StatusEnum.inactive,
       },
+      externalId: dto.externalId,
     });
 
     const hash = await this.jwtService.signAsync(

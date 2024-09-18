@@ -1,3 +1,5 @@
+
+
 import { Transform, Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
@@ -6,6 +8,10 @@ import {
   IsNotEmpty,
   IsOptional,
   MinLength,
+
+
+IsString,
+
 } from 'class-validator';
 import { FileDto } from '../../files/dto/file.dto';
 import { RoleDto } from '../../roles/dto/role.dto';
@@ -48,6 +54,10 @@ export class CreateUserDto {
   @IsOptional()
   @Type(() => StatusDto)
   status?: StatusDto;
+  
+  @ApiProperty()
+  @IsString()
+      externalId: string;
 
   hash?: string | null;
 }

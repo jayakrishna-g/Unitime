@@ -115,6 +115,11 @@ export class UserSchemaClass extends EntityDocumentHelper {
   @ApiProperty()
   @Prop()
   deletedAt: Date;
+
+  @ApiProperty()
+  @Prop()
+  externalId: string;
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(UserSchemaClass);
