@@ -30,6 +30,7 @@ type CreateUserFormData = {
   passwordConfirmation: string;
   photo?: FileEntity;
   role: Role;
+  externalId: string;
 };
 
 const useValidationSchema = () => {
@@ -78,6 +79,8 @@ const useValidationSchema = () => {
         name: yup.string(),
       })
       .required(t("admin-panel-users-create:inputs.role.validation.required")),
+
+    externalId: yup.string().required("External Id is required"),
   });
 };
 
@@ -226,6 +229,14 @@ function FormCreateUser() {
                 renderOption={(option) =>
                   t(`admin-panel-users-create:inputs.role.options.${option.id}`)
                 }
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormTextInput<CreateUserFormData>
+                name="externalId"
+                testId="external-id"
+                label={"External Id"}
               />
             </Grid>
 
