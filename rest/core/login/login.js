@@ -38,6 +38,7 @@ exports.apiSignUp = async (req, res) => {
     if (!user) {
       const details = req.body;
       const user = new User(details);
+      console.log(user);
       user.password = user.generateHash(user.password);
       user.save((err) => {
         if (err) {

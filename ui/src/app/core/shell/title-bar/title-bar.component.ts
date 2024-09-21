@@ -19,13 +19,13 @@ export class TitleBarComponent implements OnInit {
 
   ngOnInit(): void {
     const DialogData = this.authservice.getTokenData();
-    this.user.next(DialogData.businessName);
+    this.user.next(DialogData.name);
   }
   displayDetails() {
     const DialogData = this.authservice.getTokenData();
     this.dialog.open(DisplayDetailsComponent, {
       data: {
-        name: DialogData.businessName,
+        name: DialogData.name,
         email: DialogData.email,
       },
     });

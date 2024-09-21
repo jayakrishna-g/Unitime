@@ -4,6 +4,7 @@ import { Product } from '../product/product.component';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ProductService } from '../products-services/product-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 type GenricPref = {
   key: string;
@@ -50,22 +51,28 @@ export class EditAssignmentPrefComponent implements OnInit {
   distributionPrefOptions = distributionPrefOptions;
   coursePrefOptions = coursePrefOptions;
   coursePref = new BehaviorSubject<GenricPref[]>([{ key: '', value: '' }]);
+  semesters = ['Fall-2024', 'Spring-2025', 'Fall-2025', 'Spring-2026'];
+  selected_semester = this.semesters[0];
+  TimePreferences = '';
   constructor(
     private route: ActivatedRoute,
     private authService: AuthenticationService,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private toaster: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.product = this.route.snapshot.data.product;
-    this.preferences.next(this.product.preferenceTime);
-    this.coursePref.next(this.coursePref_fromString(this.product.classAssignment));
-    this.distributionPref.next(this.distributionref_fromString(this.product.roomDistribution));
+    this.preferences.next(this.product.semesterPreference[this.selected_semester].preferenceTime);
+    this.coursePref.next(this.product.semesterPreference[this.selected_semester].course);
+    this.distributionPref.next(this.product.semesterPreference[this.selected_semester].roomDistribution);
+    this.selected_semester = this.semesters[0];
+    this.TimePreferences = this.product.semesterPreference[this.selected_semester].preferenceTime;
   }
 
   getUserName(): string {
-    return this.authService.getTokenData().businessName;
+    return this.authService.getTokenData().name;
   }
 
   update() {
@@ -73,10 +80,41 @@ export class EditAssignmentPrefComponent implements OnInit {
     this.product.roomDistribution = this.distributionPref_toString();
     this.product.course = this.coursePref.value.map((pref) => pref.key);
     this.product.classAssignment = this.coursePref_toString();
-    console.log(this.product);
-    this.productService.updateProduct(this.product).subscribe((res) => {
+    this.product.semester = this.selected_semester;
+    // this.product.semesterPreference = {};
+    //console.log(this.distributionPref.value);
+    //console.log(this.coursePref.value);
+    const semesterPreference = {
+      [this.selected_semester]: {
+        preferenceTime: this.preferences.value,
+        roomDistribution: this.distributionPref.value,
+        course: this.coursePref.value,
+      },
+    };
+    console.log(semesterPreference);
+    this.product.semesterPreference = semesterPreference;
+    // console.log(this.product);
+    this.productService.updateSemPreference(this.product._id, this.product).subscribe((res) => {
       console.log(res);
+      this.toaster.success('Preferences Updated Successfully');
     });
+  }
+
+  changeOption(event: any) {
+    this.selected_semester = event.toString();
+    console.log(this.selected_semester);
+    console.log(event);
+    if (this.product.semesterPreference[this.selected_semester] === undefined) {
+      this.preferences.next('');
+      this.coursePref.next([{ key: '', value: '' }]);
+      this.distributionPref.next([{ key: '', value: '' }]);
+      console.log(this.preferences.value);
+    } else {
+      this.preferences.next(this.product.semesterPreference[this.selected_semester].preferenceTime);
+      this.coursePref.next(this.product.semesterPreference[this.selected_semester].course);
+      this.distributionPref.next(this.product.semesterPreference[this.selected_semester].roomDistribution);
+      console.log(this.distributionPref.value);
+    }
   }
 
   back() {

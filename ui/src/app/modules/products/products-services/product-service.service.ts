@@ -21,7 +21,7 @@ export class ProductService {
   }
 
   createProduct(product: Product): Observable<Product> {
-    return this.http.post('/api/products', product) as Observable<Product>;
+    return this.http.post('/api/signup', product) as Observable<Product>;
   }
 
   getProducts() {
@@ -36,8 +36,12 @@ export class ProductService {
     return this.http.get(`/api/products/${id}`) as Observable<Product>;
   }
 
-  updateProduct(product: Product) {
+  updateProduct(product: any) {
     return this.http.put(`/api/products/${product._id}`, product);
+  }
+
+  updateSemPreference(id: string, product: Product) {
+    return this.http.put(`/api/products/${id}/semPreference`, product);
   }
 
   deleteProducts(product: Product) {

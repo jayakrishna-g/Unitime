@@ -21,10 +21,7 @@ export class ProductsComponent implements OnInit {
     'roomDistribution',
     'course',
     'teachingPreference',
-    'maximalLoad',
     'classAssignment',
-    'examAssignment',
-    'ignoreTooFar',
   ];
   dataSource = new MatTableDataSource(this.products);
   @ViewChild(MatPaginator) paginator!: MatPaginator;

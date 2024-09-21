@@ -12,12 +12,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'home',
-        loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
-      },
-      {
         path: 'professors',
         loadChildren: () => import('./modules/products/products.module').then((m) => m.ProductsModule),
+      },
+      {
+        path: 'home',
+        loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
       },
     ],
   },

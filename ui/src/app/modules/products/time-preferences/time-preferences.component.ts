@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-time-preferences',
   templateUrl: './time-preferences.component.html',
   styleUrls: ['./time-preferences.component.scss'],
 })
-export class TimePreferencesComponent implements OnInit {
+export class TimePreferencesComponent implements OnInit, OnChanges {
   @Input() preferences!: string;
   @Output() preferencesChange = new EventEmitter<string>();
   @Input() disableClick!: boolean;
@@ -112,13 +112,32 @@ export class TimePreferencesComponent implements OnInit {
     return true;
   }
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     if (this.is_valid(this.preferences)) {
       console.log('valid');
       this.from_string(this.preferences);
+    }
+    console.log('preferences');
+    console.log(this.preferences);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    if (changes.preferences) {
+      if (this.is_valid(changes.preferences.currentValue)) {
+        console.log('valid');
+        this.from_string(changes.preferences.currentValue);
+      } else {
+        this.availability_matrix = [
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ];
+      }
     }
   }
 
@@ -127,8 +146,8 @@ export class TimePreferencesComponent implements OnInit {
       return;
     }
     this.availability_matrix[i][j] = (this.availability_matrix[i][j] + 1) % 7;
-      this.preferences = this.to_string();
-      // console.log(this.preferences);
-      this.preferencesChange.emit(this.preferences);
+    this.preferences = this.to_string();
+    // console.log(this.preferences);
+    this.preferencesChange.emit(this.preferences);
   }
 }

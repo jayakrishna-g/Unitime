@@ -14,14 +14,16 @@ export interface AuthenticationResponse {
 }
 
 export interface SignUpForm {
-  businessName: string;
+  name: string;
   email: string;
   password: string;
 }
 
 export interface TokenData {
-  businessName: string;
+  name: string;
   email: string;
+  _id: string;
+  role: string;
 }
 
 @Injectable({
@@ -72,14 +74,32 @@ export class AuthenticationService {
     }
     if (tokenData) {
       localStorage.setItem('tokenData', JSON.stringify(tokenData));
+      localStorage.setItem('role', tokenData.role);
+      localStorage.setItem('id', tokenData._id);
     }
   }
 
   getTokenData(): TokenData {
     const tokenData: string | null = localStorage.getItem('tokenData');
     if (!tokenData) {
-      return { businessName: 'Broke', email: 'Broke' };
+      return { name: 'Broke', email: 'Broke', _id: 'Broke', role: 'Broke' };
     }
     return JSON.parse(tokenData) as TokenData;
+  }
+
+  getRoute(): string {
+    const role = localStorage.getItem('role');
+    if (role === '2') {
+      const id = localStorage.getItem('id');
+      return `professors/${id}`;
+    } else if (role === '1') {
+      return 'home';
+    }
+
+    return 'login';
+  }
+
+  getRole(): string {
+    return localStorage.getItem('role') || '0';
   }
 }

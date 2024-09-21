@@ -10,6 +10,16 @@
 <br />
 <br />
 
+<div class="semester">
+  <mat-form-field>
+    <mat-select placeholder="Semester" (ngModelChange)="changeOption($event)" [(ngModel)]="selected_semester">
+      <mat-option *ngFor="let sem of semesters" [value]="sem">
+        {{ sem }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
 <div class="header-block">
   <h1>Time Preferences</h1>
 </div>
@@ -45,7 +55,7 @@
 <div class="header-block">
   <h1>Course Pref</h1>
   <div class="header-actions">
-    <button mat-raised-button color="primary" (click)="addDistributionPref()">Add</button>
+    <button mat-raised-button color="primary" (click)="addCoursePref()">Add</button>
   </div>
 </div>
 

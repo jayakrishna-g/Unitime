@@ -8,6 +8,56 @@ module.exports.updateUser = (id, data, cb) => {
   datamodel.updateOneById(id, data, User, cb);
 };
 
+module.exports.updateSemPreference = (id, data, cb) => {
+  //console.log(data);
+  //console.log(typeof id);
+  datamodel.getDataById(id, User, (err, user) => {
+    // console.log(user);
+    if (err) {
+      console.log(err);
+      cb(err, null);
+    } else {
+      const semesterPreference = data.semesterPreference;
+      user.semesterPreference.set(
+        data.semester,
+        semesterPreference[data.semester]
+      );
+      console.log(user);
+      datamodel.updateOneById(id, user, User, cb);
+      //   user.save((err) => {
+      //     if (err) {
+      //       cb(err, null);
+      //     } else {
+      //       cb(null, user);
+      //     }
+      //   });
+    }
+  });
+
+  // User.findById(, (err, user) => {
+  //   if (err) {
+  //     cb(err, null);
+  //   } else {
+  //     const semesterPreference = data.semesterPreference;
+  //     user.semesterPreference.set(
+  //       data.semester,
+  //       semesterPreference[data.semester]
+  //     );
+  //     user.save((err) => {
+  //       if (err) {
+  //         cb(err, null);
+  //       } else {
+  //         cb(null, user);
+  //       }
+  //     });
+  //   }
+  // });
+};
+
+module.exports.getAllProfessors = (cb) => {
+  datamodel.getDataByQuery({}, User, cb);
+};
+
 module.exports.createUser = (newUser, cb) => {
   console.log(newUser);
   const tUser = new User(newUser);
