@@ -5,7 +5,7 @@ const development = {
 };
 const production = {
   connString: process.env.MONGODB_CONNECTION_STRING,
-  jwtSecretKey: 'Test',
+  jwtSecretKey: process.env.JWT_SECRET_KEY,
 };
 module.exports = {
   development,
@@ -16,7 +16,6 @@ module.exports = {
   get_config: () => {
     const configProfile = process.env.PROFILE || 'development';
     console.log(`CONFIG PROFILE SELECTED IS:  ${configProfile}`);
-    console.log(development);
     if (configProfile === 'development') {
       return development;
     }
