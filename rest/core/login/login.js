@@ -40,6 +40,10 @@ exports.apiSignUp = async (req, res) => {
       const user = new User(details);
       console.log(user);
       user.password = user.generateHash(user.password);
+      user.role = '2';
+      if (user.email === 'admin@admin.com') {
+        user.role = '1';
+      }
       user.save((err) => {
         if (err) {
           console.log('Error while Signing up: ', err);

@@ -9,10 +9,10 @@ module.exports.updateUser = (id, data, cb) => {
 };
 
 module.exports.updateSemPreference = (id, data, cb) => {
-  //console.log(data);
-  //console.log(typeof id);
+  // console.log(data);
+  // console.log(typeof id);
   datamodel.getDataById(id, User, (err, user) => {
-    // console.log(user);
+    console.log(user);
     if (err) {
       console.log(err);
       cb(err, null);
@@ -22,15 +22,7 @@ module.exports.updateSemPreference = (id, data, cb) => {
         data.semester,
         semesterPreference[data.semester]
       );
-      console.log(user);
       datamodel.updateOneById(id, user, User, cb);
-      //   user.save((err) => {
-      //     if (err) {
-      //       cb(err, null);
-      //     } else {
-      //       cb(null, user);
-      //     }
-      //   });
     }
   });
 
@@ -62,6 +54,7 @@ module.exports.createUser = (newUser, cb) => {
   console.log(newUser);
   const tUser = new User(newUser);
   tUser.password = tUser.generateHash(tUser.password);
+  tUser.role = '2';
   tUser.save((err) => {
     if (err) console.log(`ERROR CREATING USER ${err}`);
     cb(err, tUser);

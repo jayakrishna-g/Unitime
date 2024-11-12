@@ -3,8 +3,10 @@ const apiRoutes = require('./rest/index');
 const app = express();
 const port = process.env.PORT || 5050;
 const cors = require('cors');
+const compression = require('compression');
 
 app.use(cors());
+app.use(compression());
 
 app.use(express.json());
 
