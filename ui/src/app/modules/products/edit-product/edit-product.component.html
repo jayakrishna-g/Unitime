@@ -21,12 +21,12 @@
     </mat-form-field>
   </div>
 
-  <div class="custom-form-field w-100">
+  <!-- <div class="custom-form-field w-100">
     <label>Note</label>
     <mat-form-field class="w-100">
       <textarea type="text" matInput formControlName="note" placeholder="Note"> </textarea>
     </mat-form-field>
-  </div>
+  </div> -->
 
   <!-- <div class="custom-form-field w-100">
     <label>Preference Time</label>
@@ -64,7 +64,7 @@
       <input type="text" matInput formControlName="classAssignment" placeholder="Class Assignment" />
     </mat-form-field>
   </div> -->
-  <div class="custom-form-field w-100">
+  <!-- <div class="custom-form-field w-100">
     <label>Exam Assignment</label>
     <mat-form-field class="w-100">
       <input type="text" matInput formControlName="examAssignment" placeholder="Exam Assignment" />
@@ -74,6 +74,17 @@
     <label>Ignore Too Far</label>
     <mat-form-field class="w-100">
       <input type="text" matInput formControlName="ignoreTooFar" placeholder="Ignore Too Far" />
+    </mat-form-field>
+  </div> -->
+
+  <div class="custom-form-field w-100">
+    <label>Role</label>
+    <mat-form-field appearance="fill">
+      <mat-label>Roles</mat-label>
+      <select matNativeControl required formControlName="role">
+        <option value="1">Admin</option>
+        <option value="2">User</option>
+      </select>
     </mat-form-field>
   </div>
   <div class="custom-form-field w-100">

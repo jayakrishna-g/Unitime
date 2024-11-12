@@ -41,14 +41,15 @@ export class LoginComponent implements OnInit {
           this.authService.setToken(loginStatus.token);
           this.authService.storeTokenData(loginStatus.token);
         }
-        this.router.navigate(['home']);
+        const route = this.authService.getRoute();
+        this.router.navigate([route]);
       });
   }
 
   signup() {
     this.authService
       .signUp({
-        businessName: this.signUpForm.controls['businessName'].value,
+        name: this.signUpForm.controls['name'].value,
         email: this.signUpForm.controls['email'].value,
         password: this.signUpForm.controls['password'].value,
       })
@@ -56,7 +57,8 @@ export class LoginComponent implements OnInit {
       .subscribe((signUpStatus) => {
         console.log(signUpStatus);
         if (signUpStatus) {
-          this.router.navigate(['login']);
+          const route = this.authService.getRoute();
+          this.router.navigate([route]);
         }
       });
   }
@@ -80,10 +82,21 @@ export class LoginComponent implements OnInit {
 
   private createSignUpForm() {
     this.signUpForm = this.formBuilder.group({
-      businessName: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.required],
       passwordAgain: ['', Validators.required],
     });
+  }
+
+  private getRoute() {
+    const role = localStorage.getItem('role');
+    if (role === '1') {
+      return 'admin';
+    } else if (role === '2') {
+      return 'user';
+    } else {
+      return 'login';
+    }
   }
 }

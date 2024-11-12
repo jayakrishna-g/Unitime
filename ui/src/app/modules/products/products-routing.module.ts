@@ -7,11 +7,13 @@ import { ProductsComponent } from './products/products.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { EditAssignmentPrefComponent } from './edit-assignment-pref/edit-assignment-pref.component';
+import { AdminGuard } from 'src/app/core/authentication/admin.guard';
 
 const routes: Routes = [
-  { path: '', component: ProductsComponent, resolve: { products: ProductsResolver } },
+  { path: '', canActivate: [AdminGuard], component: ProductsComponent, resolve: { products: ProductsResolver } },
   {
     path: 'new',
+    canActivate: [AdminGuard],
     component: ProductFormComponent,
   },
   {

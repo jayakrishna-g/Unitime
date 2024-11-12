@@ -25,7 +25,7 @@
         <form (ngSubmit)="signup()" [formGroup]="signUpForm" *ngIf="formChoice === 'signup'">
           <mat-form-field>
             <mat-label>Business Name</mat-label>
-            <input type="text" matInput formControlName="businessName" placeholder="FullName" />
+            <input type="text" matInput formControlName="name" placeholder="FullName" />
           </mat-form-field>
 
           <mat-form-field>

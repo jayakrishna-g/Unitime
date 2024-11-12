@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const productService = require('./instructor.service');
+const userService = require('../User/user.service');
 const middleware = require('../../core/middleware/middleware');
 
 router.get('/all', middleware.verifyToken, (req, res) => {
-  productService.getAll(req.user, (err, result) => {
+  userService.getAllProfessors((err, result) => {
     if (err) {
       res.status(500).send({ message: 'Internal Server Error' });
     } else {
@@ -13,11 +14,13 @@ router.get('/all', middleware.verifyToken, (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  productService.readProduct(req.params.id, (err, result) => {
+  userService.readUser(req.params.id, (err, result) => {
     if (err) {
-      res.status(404).send({ message: 'Product not Found' });
+      res.status(404).send({ message: 'User not Found' });
     } else {
-      res.status(200).send(result);
+      let result1 = { ...result._doc };
+      delete result1.password;
+      res.status(200).send(result1);
     }
   });
 });
@@ -35,7 +38,15 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  productService.updateProduct(req.params.id, req.body, (err, result) => {
+  // productService.updateProduct(req.params.id, req.body, (err, result) => {
+  //   if (err) {
+  //     res.status(404).send({ message: 'Product not Found' });
+  //   } else {
+  //     res.status(200).send(result);
+  //   }
+  // });
+
+  userService.updateUser(req.params.id, req.body, (err, result) => {
     if (err) {
       res.status(404).send({ message: 'Product not Found' });
     } else {
@@ -43,6 +54,17 @@ router.put('/:id', (req, res) => {
     }
   });
 });
+
+router.put('/:id/semPreference', (req, res) => {
+  userService.updateSemPreference(req.params.id, req.body, (err, result) => {
+    if (err) {
+      res.status(404).send({ message: 'User not Found' });
+    } else {
+      res.status(200).send(result);
+    }
+  });
+});
+
 router.delete('/:id', (req, res) => {
   productService.deleteProduct(req.params.id, (err, result) => {
     if (err) {

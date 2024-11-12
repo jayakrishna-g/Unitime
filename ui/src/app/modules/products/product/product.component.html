@@ -16,12 +16,12 @@
         class="actions"
         style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 1em"
       >
-        <button mat-flat-button color="primary" (click)="onEdit()">Edit</button>
+        <button mat-flat-button color="primary" (click)="onEdit()">Edit User Details</button>
         <button mat-flat-button color="primary" (click)="onEditAssignment()">Edit Assignment Preferences</button>
-        <button mat-flat-button color="primary" (click)="onDelete()">Edit Preferences</button>
-        <button mat-flat-button color="primary" (click)="onDelete()">Previous</button>
-        <button mat-flat-button color="primary" (click)="onDelete()">Next</button>
-        <button mat-flat-button color="primary" (click)="onDelete()">Back</button>
+        <!-- <button mat-flat-button color="primary" (click)="onDelete()">Edit Preferences</button>
+         <button mat-flat-button color="primary" (click)="onDelete()">Previous</button>
+        <button mat-flat-button color="primary" (click)="onDelete()">Next</button> 
+        <button mat-flat-button color="primary" (click)="onDelete()">Back</button> -->
       </div>
     </div>
     <mat-divider></mat-divider>
@@ -30,13 +30,13 @@
       <span>External Id: </span>
       <span>{{ product.externalId }}</span>
       <span>Account Name: </span>
-      <span>{{ product.externalId }}</span>
+      <span>{{ product.name }}</span>
       <span>Email: </span>
-      <span>{{ product.externalId + '@asu.edu' }}</span>
+      <span>{{ product.email }}</span>
       <span>Position: </span>
       <span>{{ product.position }}</span>
-      <span>Maximum Load: </span>
-      <span>{{ product.maximalLoad }}</span>
+      <span>Department</span>
+      <span>{{ product.department }}</span>
 
       <!-- <span>Note: </span>
       <span>{{ product.note }}</span>
@@ -55,28 +55,59 @@
       <span>Department: </span>
       <span>{{ product.department }}</span> -->
     </div>
-    <div style="margin-top: 2em; display: flex; flex-direction: column; width: 100%; gap: 0.2em">
-      <h1>Class Assignments</h1>
-      <mat-divider></mat-divider>
-      <br />
-      <span>{{ product.classAssignment }}</span>
-      <br />
-      <br />
+
+    <br />
+    <br />
+    <br />
+
+    <div class="semester">
+      <mat-form-field>
+        <mat-label>Semester</mat-label>
+        <mat-select placeholder="Semester" (ngModelChange)="onSemesterChange($event)" [(ngModel)]="selected_semester">
+          <mat-option *ngFor="let sem of semesters" [value]="sem">
+            {{ sem }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
 
-    <div style="margin-top: 2em; display: flex; flex-direction: column; width: 100%; gap: 0.2em">
-      <h1>Preferences</h1>
-      <mat-divider></mat-divider>
-      <br />
-      <app-time-preferences [preferences]="this.product.preferenceTime" [disableClick]="true"></app-time-preferences>
-    </div>
+    <ng-container *ngIf="selected_semester">
+      <app-time-preferences [preferences]="(preferences | async) || ''" [disableClick]="true"></app-time-preferences>
+    </ng-container>
 
-    <div style="margin-top: 2em; display: flex; flex-direction: column; width: 100%; gap: 0.2em">
-      <h1>Teaching Assignment</h1>
-      <mat-divider></mat-divider>
-      <br />
-      <span>{{ product.examAssignment }}</span>
-      <br />
+    <!-- distribution preference -->
+
+    <div class="header-block"></div>
+    <h1>Distribution Preferences</h1>
+  </div>
+
+  <div>
+    <div *ngFor="let distribution of roomDistribution" style="margin-bottom: 1em">
+      <mat-form-field appearance="fill" width="100%">
+        <mat-label>Room Distribution</mat-label>
+        <input matInput readonly="true" width="100%" value="{{ distribution.key }}" placeholder="Room Distribution" />
+      </mat-form-field>
+
+      <mat-form-field style="margin-left: 1em">
+        <mat-label>Value</mat-label>
+        <input matInput readonly="true" value="{{ distribution.value }}" placeholder="Value" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <h1>Course Preferences</h1>
+  <!-- course preference -->
+  <div>
+    <div *ngFor="let course of coursePref">
+      <mat-form-field appearance="fill" width="100%">
+        <mat-label>Course Distribution</mat-label>
+        <input matInput readonly="true" width="100%" value="{{ course.key }}" placeholder="Room Distribution" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Value</mat-label>
+        <input matInput readonly="true" value="{{ course.value }}" placeholder="Value" />
+      </mat-form-field>
     </div>
   </div>
 </div>

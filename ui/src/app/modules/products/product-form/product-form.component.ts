@@ -32,16 +32,20 @@ export class ProductFormComponent implements OnInit {
       name: ['', Validators.required],
       externalId: [''],
       position: [''],
-      note: [''],
-      preferenceTime: [''],
-      roomDistribution: [''],
-      course: [[]],
-      teachingPreference: [[]],
-      maximalLoad: [0],
-      classAssignment: [''],
-      examAssignment: [''],
-      ignoreTooFar: [false],
+      role: [''],
+      password: ['', Validators.required],
+      email: ['', Validators.required],
+      // note: [''],
+      // preferenceTime: [''],
+      // roomDistribution: [''],
+      // course: [[]],
+      // teachingPreference: [[]],
+      // maximalLoad: [0],
+      // classAssignment: [''],
+      // examAssignment: [''],
+      // ignoreTooFar: [false],
       department: [''],
+      semesterPreference: {},
     });
   }
 
@@ -61,10 +65,11 @@ export class ProductFormComponent implements OnInit {
     if (this.productForm.valid) {
       this.productService.createProduct(this.productForm.value).subscribe(
         () => {
-          this.toaster.success('Updated Product Successfully');
+          // this.toaster.success('Updated  Successfully');
+          this.router.navigate(['../'], { relativeTo: this.route });
         },
         () => {
-          this.toaster.error('Failed to Update Product');
+          this.toaster.error('Failed to add User');
         }
       );
     }

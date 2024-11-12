@@ -5,9 +5,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { untilDestroyed } from '@ngneat/until-destroy';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { ProductService } from '../products-services/product-service.service';
+import { BehaviorSubject } from 'rxjs';
 export interface Customisation {
   price: number;
   quantity: string;
+}
+
+type GenricPref = {
+  key: string;
+  value: string;
+};
+export interface SemesterPreference {
+  preferenceTime: string;
+  roomDistribution: GenricPref[];
+  course: GenricPref[];
 }
 export class Product {
   constructor(
@@ -21,11 +32,13 @@ export class Product {
     public roomDistribution: string = '',
     public course: string[] = [],
     public teachingPreference: boolean[] = [],
-    public maximalLoad: number = 0,
     public classAssignment: string = '',
-    public examAssignment: string = '',
-    public ignoreTooFar: boolean = false,
-    public department: string = ''
+    // public examAssignment: string = '',
+    public department: string = '',
+    public email: string = '', //public semester: string[] = ['Fall-2024', 'Spring-2025', 'Fall-2025', 'Spring-2026']
+    public semester: string = '', // public semesterPreference: { [key: string]: {} } = {}
+    public semesterPreference: { [key: string]: SemesterPreference } = {},
+    public role: string = ''
   ) {}
 
   private updateInServer(options: any) {
@@ -55,6 +68,12 @@ export class Product {
 export class ProductComponent implements OnInit {
   product!: Product;
 
+  semesters = ['Fall-2024', 'Spring-2025', 'Fall-2025', 'Spring-2026'];
+  //semesters: string[] = [];
+  selected_semester = this.semesters[0];
+  roomDistribution: GenricPref[] = [{ key: '', value: '' }];
+  coursePref: GenricPref[] = [{ key: '', value: '' }];
+  preferences = new BehaviorSubject<string>('');
   constructor(
     private route: ActivatedRoute,
     public domSanitizer: DomSanitizer,
@@ -64,31 +83,29 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.product = this.route.snapshot.data.product;
-  }
-
-  productDetailsEdit(): void {
-    console.log(this.product);
-    this.dialog
-      .open(ProductFormComponent, {
-        data: this.product,
-      })
-      .afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe((res: Product) => {
-        if (res) {
-          this.product = res;
-        }
-      });
+    this.roomDistribution = this.product.semesterPreference[this.selected_semester].roomDistribution;
+    this.coursePref = this.product.semesterPreference[this.selected_semester].course;
+    //this.semesters = Object.keys(this.product.semesterPreference);
+    this.preferences.next(this.product.semesterPreference[this.selected_semester].preferenceTime);
+    console.log(this.semesters);
   }
 
   onEdit(): void {
     this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
-  onDelete(): void {
-    this.product.update();
+  onSemesterChange(event: any): void {
+    console.log(event);
+    if (this.product.semesterPreference[event] === undefined) {
+      this.preferences.next(' ');
+      this.roomDistribution = [{ key: '', value: '' }];
+      this.coursePref = [{ key: '', value: '' }];
+    } else {
+      this.preferences.next(this.product.semesterPreference[event].preferenceTime);
+      this.coursePref = this.product.semesterPreference[event].course;
+      this.roomDistribution = this.product.semesterPreference[event].roomDistribution;
+    }
   }
-
   onEditAssignment(): void {
     this.router.navigate(['edit-assignment'], { relativeTo: this.route });
   }

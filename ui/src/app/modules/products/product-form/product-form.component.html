@@ -15,16 +15,22 @@
     </mat-form-field>
   </div>
   <div class="custom-form-field w-100">
-    <label>Position</label>
+    <label>Email</label>
     <mat-form-field class="w-100">
-      <input type="text" matInput formControlName="position" placeholder="Position" />
+      <input type="email" matInput formControlName="email" placeholder="email" />
     </mat-form-field>
   </div>
 
   <div class="custom-form-field w-100">
-    <label>Note</label>
+    <label>password</label>
     <mat-form-field class="w-100">
-      <textarea type="text" matInput formControlName="note" placeholder="Note"> </textarea>
+      <input type="password" matInput formControlName="password" placeholder="password" />
+    </mat-form-field>
+  </div>
+  <div class="custom-form-field w-100">
+    <label>position</label>
+    <mat-form-field class="w-100">
+      <input type="text" matInput formControlName="position" placeholder="Position" />
     </mat-form-field>
   </div>
 
@@ -65,15 +71,13 @@
     </mat-form-field>
   </div> -->
   <div class="custom-form-field w-100">
-    <label>Exam Assignment</label>
-    <mat-form-field class="w-100">
-      <input type="text" matInput formControlName="examAssignment" placeholder="Exam Assignment" />
-    </mat-form-field>
-  </div>
-  <div class="custom-form-field w-100">
-    <label>Ignore Too Far</label>
-    <mat-form-field class="w-100">
-      <input type="text" matInput formControlName="ignoreTooFar" placeholder="Ignore Too Far" />
+    <label>Role</label>
+    <mat-form-field appearance="fill">
+      <mat-label>Roles</mat-label>
+      <select matNativeControl required formControlName="role">
+        <option value="1">Admin</option>
+        <option value="2">User</option>
+      </select>
     </mat-form-field>
   </div>
   <div class="custom-form-field w-100">
@@ -84,7 +88,7 @@
   </div>
   <br />
   <div class="submit-actions" fxLayout="row">
-    <button type="submit" mat-flat-button class="p-16" color="primary">Update</button>
+    <button type="submit" mat-flat-button class="p-16" color="primary">Add</button>
     <button mat-stroked-button class="p-16" color="primary" (click)="back()">Back</button>
   </div>
 </form>

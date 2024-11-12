@@ -30,7 +30,9 @@ exports.generateToken = (user) => {
   const token = {
     email: user.email,
     _id: user._id,
-    businessName: user.businessName,
+    name: user.name,
+    role: user.role,
+    externalId: user.externalId,
   };
   console.log(token);
   return jwt.sign(token, envConfig.jwtSecretKey, { expiresIn: '30 days' });
